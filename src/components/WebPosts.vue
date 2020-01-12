@@ -51,7 +51,7 @@
     mounted() {
       this.loadPage(this.pageNumber)
     }
-  } // comment
+  } // comment 12345
 </script>
 
 <style scoped>
