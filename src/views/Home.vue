@@ -1,0 +1,116 @@
+<template>
+  <section>
+    <section>
+      <router-link tag="button" :to="`/wp`">WebPosts</router-link>
+    </section>
+    <section>
+      <paginate
+        :page-range="5"
+        :margin-pages="3"
+        :page-count="notes.length / step"
+        prev-text="prev"
+        next-text="next"
+        container-class="pagination"
+        :hide-prev-next="hidePrevNext"
+        :click-handler="clickCallback">
+      </paginate>
+      <div class="a">{{notes}}</div>
+      <p>Choose Date
+        <date-picker v-model="date" lang="en" type="date" name="date" format="DD-MM-YYYY" width="500"></date-picker>
+      </p>
+      <div class="textIn">
+        <p>Let's write</p>
+        <textarea class="someText" ref="field" rows="5" type="text" name="note" v-model="note" placeholder="write text"></textarea>
+      </div>
+      <button @click="add()">save</button>
+      <button @click="sortRate()">sort by importance</button>
+      <div id="exclude" v-if="notes.length">
+        <post v-for="(note, index) in page" :notes="notes" :note="note" :index="index" :key="index"></post>
+      </div>
+      <router-view/>
+    </section>
+  </section>
+</template>
+
+<script>
+  import Vue from 'vue'
+  import Post from '../components/Post.vue'
+  import DatePicker from 'vue2-datepicker'
+  import Paginate from 'vuejs-paginate'
+
+  Vue.component('paginate', Paginate)
+
+  export default {
+    name: 'Home',
+    components: {
+      DatePicker,
+      Post
+    },
+    mounted() {
+      this.$getItem('post').then(res=>{
+        this.notes = res
+        this.page = res.filter((e, index) => index < 2)
+      })
+    },
+    data() {
+      return {
+        date: '',
+        notes: [],
+        note: '',
+        page: [],
+        pageNumber: 1,
+        step: 2
+      }
+    },
+    methods: {
+      add() {
+        const note={date:this.date, note:this.note, rate: 5}
+        this.notes.push(note)
+        this.note = ''
+        this.$refs.field.focus()
+        this.date = ''
+        this.$setItem('post', this.notes)
+      },
+      sortRate() {
+        this.notes.sort((a, b) => b.rate - a.rate)
+        this.clickCallback(this.pageNumber)
+      },
+      clickCallback(pageNum) {
+        const start = (pageNum * this.step) - this.step
+        const end = (pageNum * this.step)
+        this.pageNumber = pageNum
+        this.page = this.notes.filter((e, index) => index >= start && index < end)
+      }
+    },
+    computed: {
+      hidePrevNext() {
+        return this.pageNumber === 1 || this.pageNumber >= this.notes.length / this.step
+      }
+    }
+  }
+</script>
+
+<style lang="scss">
+.pagination {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+
+  li {
+    padding: 10px;
+    list-style: none;
+    color: blue;
+  }
+
+  a {
+    color: lightsteelblue;
+  }
+
+  .active {
+    a {
+      color: grey;
+    }
+  }
+}
+
+</style>
