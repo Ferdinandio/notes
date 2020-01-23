@@ -1,15 +1,24 @@
 <template>
   <div id="app">
-    <div class="homeWrap">
-      <router-link to="/">Home</router-link>
+    <div class="wrapper">
+      <section class="header">
+        <router-link to="/">Home</router-link>
+        <router-link tag="button" :to="`/wp`">WebPosts</router-link>
+      </section>
+      <router-view :notes="notes"/>
+      <Footer></Footer>
     </div>
-    <router-view :notes="notes"/>
   </div>
 </template>
 
 <script>
+  import Footer from "./components/Footer";
+
   export default {
     name: 'App',
+    components: {
+      Footer
+    },
     data() {
       return {
         notes: []
@@ -20,58 +29,22 @@
 
 <style>
 
-  body, html {
-    margin: 0;
-  }
+body, html {
+  margin: 0;
+}
 
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-  }
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #000000;
+}
 
-  #nav {
-    padding: 30px;
-  }
-
-  #nav a {
-    font-weight: bold;
-    color: #2c3e50;
-  }
-
-  #nav a.router-link-exact-active {
-    color: #47b983;
-  }
-
-  a.router-link-exact-active.router-link-active {
-    color: currentColor;
-  }
-
-  .homeWrap {
-    background-color: white;
-  }
-
-  .textIn {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    min-width: 400px;
-    margin: auto;
-  }
-
-  .someText {
-    margin-left: 5px;
-    min-width: 500px;
-  }
-
-  .a {
-    display: none;
-  }
-
-  ul {
-    margin-block-start: 0px;
-    margin-block-end: 0px;
-  }
+.wrapper {
+  background: #ff6262;
+  margin: 0 auto;
+  max-width: 900px;
+  height: 1024px;
+}
 </style>

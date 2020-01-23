@@ -1,9 +1,5 @@
 <template>
   <section>
-    <section>
-      <router-link tag="button" :to="`/wp`">WebPosts</router-link>
-    </section>
-    <section>
       <paginate
         :page-range="5"
         :margin-pages="3"
@@ -14,7 +10,7 @@
         :hide-prev-next="hidePrevNext"
         :click-handler="clickCallback">
       </paginate>
-      <div class="a">{{notes}}</div>
+      <div class="listPostsHidden">{{notes}}</div>
       <p>Choose Date
         <date-picker v-model="date" lang="en" type="date" name="date" format="DD-MM-YYYY" width="500"></date-picker>
       </p>
@@ -28,7 +24,6 @@
         <post v-for="(note, index) in page" :notes="notes" :note="note" :index="index" :key="index"></post>
       </div>
       <router-view/>
-    </section>
   </section>
 </template>
 
@@ -108,9 +103,26 @@
 
   .active {
     a {
-      color: grey;
+      color: #2c3e50;
     }
   }
+}
+
+.textIn {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 400px;
+  margin: auto;
+}
+
+.someText {
+  margin-left: 5px;
+  min-width: 500px;
+}
+
+.listPostsHidden {
+  display: none;
 }
 
 </style>
