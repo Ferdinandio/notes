@@ -76,8 +76,11 @@
 
   @media screen and ( max-width: 400px ) {
     .nav { opacity: 0; top: 60px; width: 100px; }
+
     .a { transform: rotate(720deg);  height: 40px; margin-left: -120px }
+
     .logoButtonBurger { opacity: 1; transform: rotate(180deg) }
+
     .toggleContainer {
       opacity: 0;
       display: block;
@@ -106,8 +109,6 @@
       position: relative;
       display: inline;
       width: 350px;
-      .a {
-      }
     }
   }
 
