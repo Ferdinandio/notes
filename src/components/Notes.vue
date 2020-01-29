@@ -13,7 +13,7 @@
   import moment from 'moment'
 
   export default {
-    name: "Post",
+    name: "Notes",
     props: {
       notes: {
         type: Array

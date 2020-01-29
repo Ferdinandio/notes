@@ -1,23 +1,22 @@
 <template>
   <div id="app">
     <div class="wrapper">
-      <section class="header">
-        <router-link to="/">Home</router-link>
-        <router-link tag="button" :to="`/wp`">WebPosts</router-link>
-      </section>
-      <router-view :notes="notes"/>
-      <Footer></Footer>
+      <Header/>
+      <router-view class="content" :notes="notes"/>
+      <Footer/>
     </div>
   </div>
 </template>
 
 <script>
   import Footer from "./components/Footer";
+  import Header from "./components/Header";
 
   export default {
     name: 'App',
     components: {
-      Footer
+      Footer,
+      Header
     },
     data() {
       return {
@@ -28,6 +27,10 @@
 </script>
 
 <style>
+
+* {
+  box-sizing: border-box;
+}
 
 body, html {
   margin: 0;
@@ -42,9 +45,12 @@ body, html {
 }
 
 .wrapper {
-  background: #ff6262;
+  position: center;
+  top: 0;
+  background: gold;
   margin: 0 auto;
   max-width: 900px;
   height: 1024px;
 }
+
 </style>
