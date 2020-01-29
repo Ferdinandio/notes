@@ -27,7 +27,7 @@
   .header {
     position: relative;
     height: 50px;
-    background-color: white;
+    background-color: whitesmoke;
     width: 100%;
   }
 
@@ -59,7 +59,13 @@
   .toggleContainer {
     display: none;
     .buttonCloseHid {
-      transform: rotate(0deg);
+      position: absolute;
+      z-index: 1;
+      left: 20px;
+      height: 50px;
+      transition-duration: 0.5s;
+    }
+    .buttonClose {
       position: absolute;
       left: 20px;
       height: 50px;
@@ -73,23 +79,25 @@
     .a { transform: rotate(720deg);  height: 40px; margin-left: -120px }
     .logoButtonBurger { opacity: 1; transform: rotate(180deg) }
     .toggleContainer {
-      display: block;
       opacity: 0;
+      display: block;
       position: absolute;
       height: 50px;
       margin-left: 0;
       transition-duration: 0.5s;
-    }
-    .buttonCloseHid {
-      transform: rotate(0deg);
-      position: absolute;
-      left: 20px;
-      height: 50px;
-      transition-duration: 0.5s;
-    }
-    .buttonClose {
-      display: none;
-      transition-duration: 0.5s;
+      .buttonCloseHid {
+        transform: rotate(180deg);
+        opacity: 0;
+        position: absolute;
+        left: 20px;
+        height: 50px;
+        transition-duration: 0.5s;
+      }
+      .buttonClose {
+        opacity: 0;
+        left: 20px;
+        transition-duration: 0.5s;
+      }
     }
   }
 
@@ -127,16 +135,21 @@
       height: 200px;
       width: 120px;
       text-align: left;
-      background-color: white;
+      background-color: whitesmoke;
       transition-duration: 0.5s;
       .buttonClose {
-        display: block;
+        opacity: 1;
         position: absolute;
         transform: rotate(-180deg);
+        left: 20px;
+        height: 50px;
+        transition-duration: 0.5s;
       }
-      .buttonClose {
-        transform: rotate(0deg);
+      .buttonCloseHid {
+        opacity: 1;
         position: absolute;
+        z-index: 0;
+        transform: rotate(-180deg);
         left: 20px;
         height: 50px;
         transition-duration: 0.5s;

@@ -27,14 +27,19 @@
 </script>
 
 <style>
+  * {
+    box-sizing: border-box;
+  }
 
-* {
-  box-sizing: border-box;
-}
+  html {
+    margin: 0;
+  }
 
-body, html {
-  margin: 0;
-}
+  body {
+    background-image: url("./assets/bgr.png");
+    background-size: cover;
+    margin: 0;
+  }
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -47,10 +52,11 @@ body, html {
 .wrapper {
   position: center;
   top: 0;
-  background: gold;
+  background: whitesmoke;
   margin: 0 auto;
   max-width: 900px;
   height: 1024px;
+  opacity: 0.8;
 }
 
 </style>
