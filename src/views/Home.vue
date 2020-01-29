@@ -1,35 +1,38 @@
 <template>
   <section>
-      <paginate
-        :page-range="5"
-        :margin-pages="3"
-        :page-count="notes.length / step"
-        prev-text="prev"
-        next-text="next"
-        container-class="pagination"
-        :hide-prev-next="hidePrevNext"
-        :click-handler="clickCallback">
-      </paginate>
-      <div class="listPostsHidden">{{notes}}</div>
-      <p>Choose Date
-        <date-picker v-model="date" lang="en" type="date" name="date" format="DD-MM-YYYY" width="500"></date-picker>
-      </p>
-      <div class="textIn">
-        <p>Let's write</p>
-        <textarea class="someText" ref="field" rows="5" type="text" name="note" v-model="note" placeholder="write text"></textarea>
-      </div>
-      <button @click="add()">save</button>
-      <button @click="sortRate()">sort by importance</button>
-      <div id="exclude" v-if="notes.length">
-        <post v-for="(note, index) in page" :notes="notes" :note="note" :index="index" :key="index"></post>
-      </div>
-      <router-view/>
+    <paginate
+      :page-range="5"
+      :margin-pages="3"
+      :page-count="notes.length / step"
+      prev-text="prev"
+      next-text="next"
+      container-class="pagination"
+      :hide-prev-next="hidePrevNext"
+      :click-handler="clickCallback">
+    </paginate>
+    <div class="listPostsHidden">{{notes}}</div>
+    <p>Choose Date
+      <date-picker class="someDate" v-model="date" lang="en" type="date" name="date" format="DD-MM-YYYY" width="200"/>
+    </p>
+    <div class="textIn">
+      <p>Let's write</p>
+      <label>
+        <textarea class="someText" ref="field" rows="5" type="text" name="note" v-model="note"
+                  placeholder="write text"/>
+      </label>
+    </div>
+    <button @click="add()">save</button>
+    <button @click="sortRate()">sort by importance</button>
+    <div id="exclude" v-if="notes.length">
+      <notes v-for="(note, index) in page" :notes="notes" :note="note" :index="index" :key="index"/>
+    </div>
+    <router-view/>
   </section>
 </template>
 
 <script>
   import Vue from 'vue'
-  import Post from '../components/Post.vue'
+  import Notes from '../components/Notes.vue'
   import DatePicker from 'vue2-datepicker'
   import Paginate from 'vuejs-paginate'
 
@@ -39,7 +42,7 @@
     name: 'Home',
     components: {
       DatePicker,
-      Post
+      Notes
     },
     mounted() {
       this.$getItem('post').then(res=>{
@@ -86,7 +89,9 @@
 </script>
 
 <style lang="scss">
+
 .pagination {
+  margin: 0;
   display: flex;
   justify-content: center;
   background-color: white;
@@ -108,6 +113,10 @@
   }
 }
 
+.someDate {
+
+}
+
 .textIn {
   display: flex;
   align-items: flex-start;
@@ -117,8 +126,8 @@
 }
 
 .someText {
-  margin-left: 5px;
-  min-width: 500px;
+  /*margin-left: 50px;*/
+  /*max-width: 500px;*/
 }
 
 .listPostsHidden {

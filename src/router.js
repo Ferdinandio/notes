@@ -30,6 +30,16 @@ export default new Router({
       name: 'WebPosts',
       path: '/wp',
       component: () => import('./components/WebPosts.vue')
+    },
+    {
+      name: 'Notes',
+      path: '/notes',
+      component: () => import('./components/Notes.vue')
+    },
+    {
+      name: 'Additional',
+      path: '/further',
+      component: () => import('./components/Additional.vue')
     }
   ]
 })

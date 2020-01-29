@@ -3,7 +3,6 @@
     <section class="footer" v-show="scrolled">
       <ul class="footerList">
         <li title="About project"><a href="">О проекте</a></li>
-        <li title="Blog"><a href="">Блог</a></li>
         <li title="About me"><a href="">Обо мне</a></li>
         <li title="Email"><a class="letterIcon" href="">✉</a></li>
       </ul>
@@ -86,6 +85,7 @@ a:hover {
   color: dimgray;
   font-size: small;
   padding-right: 20px;
+  cursor: default;
 }
 
 .fade-enter-active, .fade-leave-active {
