@@ -45,7 +45,7 @@
 .footer {
   position: fixed;
   background-color: lightgray;
-  height: 35px;
+  height: 45px;
   width: 100%;
   min-width: 500px;
   bottom: 0;

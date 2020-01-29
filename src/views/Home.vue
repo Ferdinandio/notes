@@ -94,7 +94,7 @@
   margin: 0;
   display: flex;
   justify-content: center;
-  background-color: white;
+  background-color: whitesmoke;
 
   li {
     padding: 10px;
