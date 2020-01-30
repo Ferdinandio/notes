@@ -1,54 +1,136 @@
 <template>
-  <div>
-    <div>{{formatDate}}</div>
-    <div>{{note.note}}</div>
-    <div>{{note.rate}}</div>
-    <button @click="setRate(button.rate)" v-for="(button, index) in buttons" :key="index">{{button.name}}</button><br>
-    <router-link tag="button" :to="`/sp/${index}`">more</router-link>
-    <button @click="remove()">remove</button>
-  </div>
+  <section>
+    <paginate
+      :page-range="5"
+      :margin-pages="3"
+      :page-count="notes.length / step"
+      prev-text="prev"
+      next-text="next"
+      container-class="pagination"
+      :hide-prev-next="hidePrevNext"
+      :click-handler="clickCallback">
+    </paginate>
+    <div class="listPostsHidden">{{notes}}</div>
+    <p>Choose Date
+      <date-picker class="someDate" v-model="date" lang="en" type="date" name="date" format="DD-MM-YYYY" width="200"/>
+    </p>
+    <div class="textIn">
+      <p>Let's write</p>
+      <label>
+        <textarea class="someText" ref="field" rows="5" name="note" v-model="note"
+                  placeholder="write text"/>
+      </label>
+    </div>
+    <button @click="add()">save</button>
+    <button @click="sortRate()">sort by importance</button>
+    <div id="exclude" v-if="notes.length">
+      <note v-for="(note, index) in page" :notes="notes" :note="note" :index="index" :key="index"/>
+    </div>
+    <router-view/>
+  </section>
 </template>
 
 <script>
-  import moment from 'moment'
+  import Vue from 'vue'
+  import Note from '../components/Note.vue'
+  import DatePicker from 'vue2-datepicker'
+  import Paginate from 'vuejs-paginate'
+
+  Vue.component('paginate', Paginate)
 
   export default {
-    name: "Notes",
-    props: {
-      notes: {
-        type: Array
-      },
-      note: {
-        type: Object
-      },
-      index: {
-        type: Number
-      }
+    name: 'Home',
+    components: {
+      DatePicker,
+      Note
+    },
+    mounted() {
+      this.$getItem('post').then(res=>{
+        this.notes = res
+        this.page = res.filter((e, index) => index < 2)
+      })
     },
     data() {
       return {
-        buttons: [{name:'Lastly',rate:2},{name:'Simple',rate:5},{name:'Firstly',rate:10}]
+        date: '',
+        notes: [],
+        note: '',
+        page: [],
+        pageNumber: 1,
+        step: 2
       }
     },
     methods: {
-      setRate(rate) {
-        this.note.rate = rate
+      add() {
+        const note={date:this.date, note:this.note, rate: 5}
+        this.notes.push(note)
+        this.note = ''
+        this.$refs.field.focus()
+        this.date = ''
         this.$setItem('post', this.notes)
       },
-      remove() {
-        this.notes.splice(this.index, 1)
-        this.$setItem('post', this.notes)
+      sortRate() {
+        this.notes.sort((a, b) => b.rate - a.rate)
+        this.clickCallback(this.pageNumber)
+      },
+      clickCallback(pageNum) {
+        const start = (pageNum * this.step) - this.step
+        const end = (pageNum * this.step)
+        this.pageNumber = pageNum
+        this.page = this.notes.filter((e, index) => index >= start && index < end)
       }
     },
     computed: {
-      formatDate() {
-        let date = moment(String(this.note.date)).format('DD/MMM/YYYY')
-        return date
+      hidePrevNext() {
+        return this.pageNumber === 1 || this.pageNumber >= this.notes.length / this.step
       }
     }
   }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+  .pagination {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    background-color: whitesmoke;
+
+    li {
+      padding: 10px;
+      list-style: none;
+      color: blue;
+    }
+
+    a {
+      color: lightsteelblue;
+    }
+
+    .active {
+      a {
+        color: #2c3e50;
+      }
+    }
+  }
+
+  .someDate {
+
+  }
+
+  .textIn {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 400px;
+    margin: auto;
+  }
+
+  .someText {
+
+  }
+
+  .listPostsHidden {
+    display: none;
+  }
 
 </style>
