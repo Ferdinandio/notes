@@ -12,7 +12,7 @@
       </paginate>
     <div id="exclude" v-if="allPosts">
       <div class="pageWrap">
-        <div v-for="(item, index) in page" :key="index" class="item" :class="selectColor(index)">{{ item.title }}</div>
+        <div v-for="(item, index) in page" :key="index" class="item" :class="selectColor(index)">{{ item.body }}</div>
       </div>
     </div>
   </section>
