@@ -55,8 +55,10 @@
   background: whitesmoke;
   margin: 0 auto;
   max-width: 900px;
+  min-width: 300px;
   height: 1024px;
-  opacity: 0.8;
+  opacity: 0.95;
+  box-shadow: 0 0 100px 100px whitesmoke;
 }
 
 </style>
