@@ -1,6 +1,6 @@
 <template>
   <div id="note">
-    <div class="noteNum" title="note number">{{index + 1}}</div>
+<!--    <div class="noteNum" title="note number" v-if="note.id">{{notes.id}}</div>-->
     <div class="date" title="date">{{formatDate}}</div>
     <div class="textPart" title="click more-button for read whole text">{{note.note}}</div>
     <div class="rate" title="importance">{{note.rate}}</div>
@@ -8,7 +8,7 @@
       <button class="btnRate" @click="setRate(button.rate)" v-for="(button, index) in buttons"
               :key="index" title="rate">{{button.name}}</button>
     </div>
-    <router-link class="more" tag="button" :to="`/sp/${index + 1}`">
+    <router-link class="more" tag="button" :to="`/sp/${index}`">
       <img src="../assets/more.svg" alt="more" title="more">
     </router-link>
     <button class="remove" @click="remove()">
@@ -44,8 +44,7 @@
         this.$setItem('post', this.notes)
       },
       remove() {
-        this.notes.splice(this.index, 1)
-        this.$setItem('post', this.notes)
+        this.$bus.emit('removeItem', this.note.id)
       }
     },
     computed: {
@@ -63,31 +62,17 @@
     background-color: #ECF8E4;
     position: relative;
     height: 140px;
-    width: 330px;
+    width: 300px;
     box-shadow: 1px 1px 1px 1px grey;
     border-radius: 5px;
-  }
-
-  .noteNum {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    height: 20px;
-    width: 30px;
-    box-shadow: 1px 1px 1px 1px grey;
-    border-radius: 3px;
-    padding-top: 2px;
-  }
-  .noteNum:hover {
-    cursor: default;
   }
 
   .date {
     position: absolute;
     top: 10px;
-    left: 50px;
+    left: 10px;
     height: 20px;
-    width: 110px;
+    width: 150px;
     box-shadow: 1px 1px 1px 1px grey;
     border-radius: 3px;
     padding-top: 2px;
@@ -142,7 +127,7 @@
     background-color: grey;
     position: absolute;
     right: 70px;
-    bottom: 10px;
+    bottom: 70px;
     padding-top: 7px;
     height: 35px;
     width: 35px;

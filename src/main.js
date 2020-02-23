@@ -5,7 +5,9 @@ import VueLocalForage from 'vue-localforage'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './store'
+import VueBus from 'vue-bus'
 
+Vue.use(VueBus)
 Vue.use(VueAxios, axios)
 
 
