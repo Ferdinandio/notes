@@ -16,12 +16,12 @@
     name: "Footer",
     data() {
       return {
-        scrolled: false
+        scrolled: true
       }
     },
     methods: {
       scrollCount() {
-        this.scrolled = pageYOffset > 100;
+        this.scrolled = pageYOffset > 150;
       }
         // if (pageYOffset > 100) {
         //   this.scrolled = true               !!!!!!!!!
@@ -30,8 +30,11 @@
         // }
     },
     mounted() {
-      // this.$nextTick(() => {                                            !!!!!!!!
-      window.addEventListener('scroll', this.scrollCount)
+      // this.$nextTick(() => {
+      if (window.innerWidth < 1000) {
+        this.scrolled = false
+        window.addEventListener('scroll', this.scrollCount)
+      }
       // })
     },
     beforeDestroy() {
@@ -47,7 +50,6 @@
   background-color: lightgray;
   height: 45px;
   width: 100%;
-  min-width: 500px;
   bottom: 0;
   left: 0;
   display: flex;

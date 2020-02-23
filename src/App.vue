@@ -33,6 +33,7 @@
 
   html {
     margin: 0;
+    min-width: 350px;
   }
 
   body {
