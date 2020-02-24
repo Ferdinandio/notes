@@ -40,6 +40,7 @@
   }
 
   .nav {
+    z-index: 1;
     max-width: 350px;
     top: 15px;
     margin-left: 25px;
@@ -160,6 +161,12 @@
 
   #toggle {
     display: none;
+  }
+
+  label {
+    z-index: 1;
+    box-shadow: 1px 1px 1px 1px dimgray;
+    border-radius: 0 0 5px 0;
   }
 
 </style>

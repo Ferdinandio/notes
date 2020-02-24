@@ -10,18 +10,26 @@
   }
 </script>
 
-<style scoped>
-  article {
-    width: 800px;
-    height: 400px;
-    margin: 50px auto;
-    border-radius: 10px;
-    background-color: #F9FFED;
-    box-shadow: 0 0 1px 1px grey;
-    text-align: center;
-  }
-  h1 {
-    padding-top: 180px;
-    color: dimgray;
-  }
+<style lang="sass" scoped>
+  article
+    width: 700px
+    height: 400px
+    margin: 0 auto
+    border-radius: 10px
+    background-color: #F9FFED
+    box-shadow: 0 0 1px 1px grey
+    text-align: center
+
+  h1
+    padding-top: 180px
+    color: dimgray
+
+
+
+  @media screen and ( max-width: 750px )
+    article
+      margin: 0 auto
+      width: 300px
+      h1
+        padding: 150px 20px 20px 20px
 </style>

@@ -51,7 +51,6 @@
 }
 
 .wrapper {
-  position: center;
   top: 0;
   background: whitesmoke;
   margin: 0 auto;
