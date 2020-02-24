@@ -1,8 +1,8 @@
 <template>
   <section>
       <paginate
-        :page-range="step"
-        :margin-pages="3"
+        :page-range="3"
+        :margin-pages="2"
         :page-count="allPosts / step"
         prev-text="prev"
         next-text="next"
@@ -51,19 +51,39 @@
     mounted() {
       this.loadPage(this.pageNumber)
     }
-  } // comment 12345
+  }
 </script>
 
-<style scoped>
+<style lang="sass">
 
-  .item {
-    border: black solid 1px;
-    width: fit-content;
-    margin: 10px auto;
-    padding: 5px;
-  }
+  .pagination
+    margin: 0 auto
+    display: flex
+    justify-content: center
+    background-color: whitesmoke
+    li
+      padding: 7px
+      list-style: none
+      color: blue
 
-  .active {
-    color: red;
-  }
+    a
+      color: gray
+      outline: none
+
+    .active
+      a
+        border-radius: 2px
+        padding: 2px 2px 2px 2px
+        background-color: dimgray
+        color: whitesmoke
+
+  .item
+    border: black solid 1px
+    width: fit-content
+    margin: 10px auto
+    padding: 5px
+
+  .active
+    color: black
+  /* color of item which you want to change!!!*/
 </style>

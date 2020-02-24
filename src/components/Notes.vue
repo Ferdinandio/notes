@@ -131,7 +131,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
   .pagination {
     padding: 0;
@@ -155,7 +155,7 @@
 
     .active {
       a {
-        color: #2c3e50;
+        color: whitesmoke;
       }
     }
   }
@@ -179,7 +179,6 @@
         flex-wrap: wrap;
         justify-content: center;
         align-content: space-evenly;
-        /**/
         box-shadow: 0 0 2px 2px lightgrey;
         border-radius: 10px;
         .btnSort {
